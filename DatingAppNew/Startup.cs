@@ -30,6 +30,7 @@ namespace DatingAppNew
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // kod dodavanja service nije bitan redosled
 
             services.AddDbContext<DataContext>(options =>
             {
@@ -40,6 +41,7 @@ namespace DatingAppNew
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DatingAppNew", Version = "v1" });
             });
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +58,10 @@ namespace DatingAppNew
 
             app.UseRouting();
 
+            //ovde je bitan redosled sta se gde dodaje
+                        // x je policy
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+                                            // hocemo da dozvolimo sve metode: GET,POST,PUT,...
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
