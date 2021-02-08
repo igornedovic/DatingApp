@@ -21,6 +21,7 @@ namespace DatingAppNew.Controllers
         }
 
         // dodajemo dva endpointa
+        // prvi
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
