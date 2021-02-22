@@ -24,7 +24,8 @@ namespace DatingAppNew.Services
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.NameId, user.UserName) // pomocu nameId cemo sacuvati username
+                new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()), // pomocu nameId cemo sacuvati id
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
             };
 
             var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
