@@ -19,6 +19,11 @@ namespace DatingAppNew.Helpers
             CreateMap<Photo, PhotoDto>(); // mapira objekat klase Photo sa objektom klase PhotoDto
             CreateMap<MemberUpdateDto, AppUser>(); // mapira objekat klase MemberUpdateDto sa objektom klase 
             CreateMap<RegisterDto, AppUser>(); // mapira objekat klase RegisterDto sa objketom klase AppUser
+            CreateMap<Message, MessageDto>()
+                .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src =>
+                    src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src =>
+                    src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
         }
     }
 }
